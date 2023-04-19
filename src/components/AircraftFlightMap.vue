@@ -1,13 +1,25 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+import { IAircraft } from "../models/IAircraft";
+defineProps<{ aircraft: IAircraft }>();
+const canvas = ref();
+</script>
 
 <template>
-	<canvas></canvas>
+	<div class="canvas-wrapper">
+		<h3>{{ aircraft.sideNumber }}</h3>
+		<canvas class="canvas" :ref="canvas"></canvas>
+	</div>
 </template>
 
 <style scoped>
-canvas {
+.canvas-wrapper {
+	overflow-x: auto;
+}
+
+.canvas {
 	background-color: aliceblue;
-	width: 600px;
-	height: 300px;
+	width: 980px;
+	height: 150px;
 }
 </style>

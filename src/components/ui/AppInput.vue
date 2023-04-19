@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { computed } from "@vue/reactivity";
-
 interface AppInputProps {
 	label?: string;
 	type?: string;
 	placeholder?: string;
 	modelValue: string | number;
 }
-const props = withDefaults(defineProps<AppInputProps>(), {
+withDefaults(defineProps<AppInputProps>(), {
 	type: "text",
 });
 
@@ -23,7 +21,7 @@ function onInput(event: Event) {
 </script>
 
 <template>
-	<label>
+	<label class="label">
 		<span class="label-span">{{ label }}</span>
 
 		<input
@@ -37,6 +35,9 @@ function onInput(event: Event) {
 </template>
 
 <style scoped>
+.label {
+	display: block;
+}
 .input {
 	padding: 0 5px;
 	height: 30px;

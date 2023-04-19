@@ -1,6 +1,6 @@
 export interface IFlightTime {
-	departure: Date;
-	landing: Date;
+	departure: string;
+	landing: string;
 }
 
 export interface IAircraft {

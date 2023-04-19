@@ -1,47 +1,40 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import FlightTimeForm from "./FlightTimeForm.vue";
+import { IAircraft } from "../models/IAircraft";
+import Aircraft from "./Aircraft.vue";
 import AppButton from "./ui/AppButton.vue";
-import AppInput from "./ui/AppInput.vue";
-import { IAircraft, IFlightTime } from "../models/Aircraft";
 
-const sideNumber = ref("");
-const flightTimeList = ref<IFlightTime[]>([]);
-
-const emit = defineEmits<{
-	(e: "add-aircraft", aircraft: IAircraft): void;
-}>();
+const props = defineProps<{ aircraftList: IAircraft[] }>();
 
 const addAircraft = () => {
 	const aircraft: IAircraft = {
-		sideNumber: sideNumber.value,
-		flightTimeList: flightTimeList.value,
+		sideNumber: "",
+		flightTimeList: [{ departure: "", landing: "" }],
 	};
-
-	emit("add-aircraft", aircraft);
+	props.aircraftList.push(aircraft);
 };
-
-const addFlightTime = () => {};
 </script>
 
 <template>
-	<div class="wrapper">
-		<AppInput :label="'Бортовой номер'" v-model="sideNumber" />
-		<FlightTimeForm />
+	<div class="aircraft-list">
+		<Aircraft
+			v-for="(aircraft, index) in aircraftList"
+			:aircraft="aircraft"
+			:key="index"
+			class="aircraft"
+		/>
 
-		<AppButton @click="addAircraft" class="button">Добавить перелет</AppButton>
+		<AppButton @click="addAircraft" class="aircraft-list__button">
+			Добавить воздушное судно
+		</AppButton>
 	</div>
 </template>
 
 <style scoped>
-.wrapper {
-	display: flex;
-	flex-direction: column;
-	padding: 15px;
-	border: 1px solid var(--primary-color);
+.aircraft:not(:last-child) {
+	margin-bottom: 20px;
 }
-.button {
-	border: 1px solid var(--primary-color);
-	margin-left: auto;
+.aircraft-list__button {
+	margin-top: 15px;
+	margin-right: auto;
 }
 </style>

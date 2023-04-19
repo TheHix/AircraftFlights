@@ -1,34 +1,43 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import AircraftFlightMap from "./components/AircraftFlightMap.vue";
 import AircraftList from "./components/AircraftList.vue";
-import { IAircraft } from "./models/Aircraft";
+import { IAircraft } from "./models/IAircraft";
+import AircraftFlightMapList from "./components/AircraftFlightMapList.vue";
 
-const aircraftList = ref<IAircraft[]>([]);
-
-const addAircraft = (aircraft: IAircraft) => {
-	aircraftList.value.push(aircraft);
-};
+const initialAircraftList = [
+	{
+		flightTimeList: [{ departure: "", landing: "" }],
+		sideNumber: "FAS-1243124",
+	},
+];
+const aircraftList = ref<IAircraft[]>(initialAircraftList);
 </script>
 
 <template>
 	<div class="app">
-		<AircraftList @add-aircraft="addAircraft" class="app__aircraft-list" />
-		<AircraftFlightMap class="app__aircraft-flight-map" />
+		<AircraftList class="app__aircraft-list" :aircraft-list="aircraftList" />
+
+		<AircraftFlightMapList
+			class="app__aircraft-flight-map-list"
+			:aircraft-list="aircraftList"
+		/>
 	</div>
 </template>
 
 <style scoped>
 .app {
+	padding: 0px 10px;
 	margin: 0 auto;
-	max-width: 980px;
+	max-width: 1000px;
 	width: 100%;
+	display: flex;
+	flex-direction: column;
 }
 .app__aircraft-list {
 	margin-top: 40px;
 }
 
-.app__aircraft-flight-map {
+.app__aircraft-flight-map-list {
 	margin-top: 30px;
 }
 </style>
