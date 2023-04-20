@@ -57,6 +57,6 @@ watch(
 	margin-bottom: 10px;
 }
 .flight-time-error {
-	color: red;
+	color: var(--error-color);
 }
 </style>

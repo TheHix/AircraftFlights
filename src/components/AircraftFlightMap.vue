@@ -33,6 +33,6 @@ const { canvasRef } = useMovingAircraft(
 }
 
 .canvas {
-	background-color: aliceblue;
+	background-color: var(--secondary-bg-color);
 }
 </style>
