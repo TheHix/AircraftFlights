@@ -1,9 +1,5 @@
-import { computed, onMounted, onUnmounted, ref } from "vue";
-import { IAircraft, IFlightTime } from "../models/IAircraft";
-interface IFlightInterval {
-	startOffset: number;
-	intervalDuration: number;
-}
+import { onMounted, onUnmounted, ref } from "vue";
+import { IFlightTime } from "../models/IAircraft";
 
 export const useMovingAircraft = (
 	flightTimeList: IFlightTime[],
