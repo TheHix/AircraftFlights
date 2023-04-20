@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import { IAircraft } from "../models/IAircraft";
 import AircraftFlightMap from "./AircraftFlightMap.vue";
-const props = defineProps<{ aircraftList: IAircraft[] }>();
+defineProps<{ aircraftList: IAircraft[] }>();
 </script>
 
 <template>
 	<div class="aircraft-flight-map-list">
-		<div
+		<AircraftFlightMap
 			class="aircraft-flight-map"
+			:aircraft="aircraft"
 			v-for="aircraft in aircraftList"
 			:key="aircraft.sideNumber"
-		>
-			<AircraftFlightMap :aircraft="aircraft" v-if="!!aircraft.sideNumber" />
-		</div>
+		/>
 	</div>
 </template>
 

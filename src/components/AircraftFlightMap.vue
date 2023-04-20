@@ -1,14 +1,29 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { IAircraft } from "../models/IAircraft";
-defineProps<{ aircraft: IAircraft }>();
-const canvas = ref();
+import { useMovingAircraft } from "../hooks/useMovingAircraft";
+
+const props = defineProps<{ aircraft: IAircraft }>();
+
+const canvasWidth = 960;
+const canvasHeight = 150;
+
+const { canvasRef } = useMovingAircraft(
+	props.aircraft.flightTimeList,
+	canvasWidth,
+	canvasHeight
+);
 </script>
 
 <template>
 	<div class="canvas-wrapper">
 		<h3>{{ aircraft.sideNumber }}</h3>
-		<canvas class="canvas" :ref="canvas"></canvas>
+
+		<canvas
+			:width="canvasWidth"
+			:height="canvasHeight"
+			class="canvas"
+			ref="canvasRef"
+		></canvas>
 	</div>
 </template>
 
@@ -19,7 +34,5 @@ const canvas = ref();
 
 .canvas {
 	background-color: aliceblue;
-	width: 980px;
-	height: 150px;
 }
 </style>

@@ -9,11 +9,18 @@ const timeError = ref("");
 watch(
 	() => [props.flightTime.departure, props.flightTime.landing],
 	([departure, landing]) => {
-		const departureDateInMs = new Date(departure);
-		const landingDateInMs = new Date(landing);
+		const departureDate = new Date(departure);
+		const landingDate = new Date(landing);
+		const currentDate = new Date();
 
-		if (departure && landing && departureDateInMs >= landingDateInMs) {
+		if (!departure || !landing) {
+			timeError.value = "";
+		}
+
+		if (departureDate >= landingDate) {
 			timeError.value = "Дата вылета должна быть раньше даты посадки";
+		} else if (departureDate < currentDate) {
+			timeError.value = "Дата вылета должна быть позже текущего времени";
 		} else {
 			timeError.value = "";
 		}
